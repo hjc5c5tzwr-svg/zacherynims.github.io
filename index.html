@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachery Nims — Creator, Author, Filmmaker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0D1B2A;
+      --sand:   #C8A96E;
+      --cream:  #F0EBE1;
+      --sage:   #7A9E7E;
+      --rust:   #B85C2C;
+      --dark:   #07111C;
+      --mid:    #1E3448;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(7,17,28,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,110,0.15);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--sand);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--sand); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(200,169,110,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(184,92,44,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Dune silhouette */
+    .dune-svg {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      pointer-events: none; opacity: 0.18;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sand);
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.45rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(240,235,225,0.6);
+      margin: 1.6rem 0 3rem;
+      max-width: 560px;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .tag {
+      border: 1px solid rgba(200,169,110,0.4);
+      color: var(--sand);
+      padding: 0.3rem 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .hero-scroll {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: rgba(240,235,225,0.4);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bob 2.5s ease-in-out infinite;
+      text-decoration: none;
+    }
+    .hero-scroll:hover { color: var(--sand); }
+    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .section-intro {
+      color: rgba(240,235,225,0.6);
+      max-width: 600px;
+      font-size: 1.05rem;
+      margin-bottom: 3.5rem;
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--sand);
+      margin: 1.5rem 0;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--dark); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { margin-bottom: 1.2rem; color: rgba(240,235,225,0.75); }
+    .about-text p strong { color: var(--sand); font-weight: 700; }
+    .about-stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .stat-box {
+      background: var(--mid);
+      border: 1px solid rgba(200,169,110,0.2);
+      padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--sand);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240,235,225,0.5);
+      margin-top: 0.4rem;
+    }
+
+    /* ── FILM ── */
+    #film { background: var(--navy); }
+    .film-highlight {
+      background: linear-gradient(135deg, var(--mid) 0%, #0f2236 100%);
+      border: 1px solid rgba(200,169,110,0.25);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .film-highlight::before {
+      content: '▶';
+      position: absolute; right: 2rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 4rem;
+      color: rgba(200,169,110,0.07);
+    }
+    .film-highlight h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--sand);
+      margin-bottom: 0.5rem;
+    }
+    .film-highlight p { color: rgba(240,235,225,0.65); max-width: 620px; }
+    .film-badge {
+      display: inline-block;
+      background: var(--rust);
+      color: white;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+    .vimeo-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1.2rem;
+      color: var(--sand);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(200,169,110,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .vimeo-link:hover { border-color: var(--sand); }
+
+    /* ── BOOKS ── */
+    #books { background: var(--dark); }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .book-card {
+      background: var(--mid);
+      border-top: 3px solid var(--sand);
+      padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .book-card.children { border-top-color: var(--sage); }
+    .book-card.children .book-genre { color: var(--sage); }
+    .book-card.novel { border-top-color: var(--rust); }
+    .book-card.novel .book-genre { color: var(--rust); }
+    .book-genre {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 0.7rem;
+    }
+    .book-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.7rem;
+      line-height: 1.25;
+    }
+    .book-card p {
+      font-size: 0.9rem;
+      color: rgba(240,235,225,0.6);
+      line-height: 1.65;
+    }
+
+    /* ── MUSIC & DOCUMENTARY ── */
+    #creative { background: var(--navy); }
+    .creative-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .creative-card {
+      background: var(--mid);
+      border: 1px solid rgba(200,169,110,0.18);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .creative-card .icon {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .creative-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--sand);
+      margin-bottom: 0.6rem;
+    }
+    .creative-card p { color: rgba(240,235,225,0.65); line-height: 1.7; }
+    .royal-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.2rem;
+      background: rgba(200,169,110,0.12);
+      border: 1px solid rgba(200,169,110,0.35);
+      color: var(--sand);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+    }
+
+    /* ── ART ── */
+    #art { background: var(--dark); }
+    .art-placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .art-tile {
+      aspect-ratio: 1;
+      background: var(--mid);
+      border: 1px dashed rgba(200,169,110,0.2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: rgba(200,169,110,0.3);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .art-tile:hover { border-color: rgba(200,169,110,0.5); color: rgba(200,169,110,0.6); }
+    .art-tile-icon { font-size: 2rem; }
+    .art-note {
+      color: rgba(240,235,225,0.4);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--dark);
+      text-align: center;
+    }
+    #contact .section-title { text-align: center; }
+    #contact .divider { margin: 1.5rem auto; }
+    #contact .section-intro { margin: 0 auto 2.5rem; text-align: center; }
+    .contact-link {
+      display: inline-block;
+      border: 1px solid var(--sand);
+      color: var(--sand);
+      padding: 0.85rem 2.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .contact-link:hover { background: var(--sand); color: var(--dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(200,169,110,0.1);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.78rem; color: rgba(240,235,225,0.3); }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      color: rgba(200,169,110,0.5);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .about-grid, .creative-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .art-placeholder-grid { grid-template-columns: repeat(2,1fr); }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll { animation: none; }
+      .book-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Z. Nims</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#film">Film</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#creative">Music & Doc</a></li>
+    <li><a href="#art">Art</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Katy, Texas</p>
+  <h1>Zachery<br><em>Nims</em></h1>
+  <p class="hero-sub">Filmmaker · Novelist · Children's Author · Musician · Documentarian · Visual Artist</p>
+  <div class="hero-tags">
+    <span class="tag">Christmas Films</span>
+    <span class="tag">Novel — VEG</span>
+    <span class="tag">Children's Books</span>
+    <span class="tag">Tunes from the Dunes</span>
+    <span class="tag">Aramco Brats</span>
+    <span class="tag">Visual Art</span>
+  </div>
+  <a href="#about" class="hero-scroll">
+    <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 1v18M1 14l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Explore the Work
+  </a>
+  <!-- Dune SVG -->
+  <svg class="dune-svg" viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,180 Q180,40 360,100 T720,60 T1080,110 T1440,50 L1440,180 Z" fill="#C8A96E"/>
+    <path d="M0,180 Q200,80 440,130 T900,90 T1440,130 L1440,180 Z" fill="#B85C2C" opacity="0.5"/>
+  </svg>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">The Creator</p>
+        <h2 class="section-title">A Life Built on<br>Storytelling</h2>
+        <div class="divider"></div>
+        <p>Zachery Nims is a multi-disciplinary creative based in <strong>Katy, Texas</strong> — a storyteller who moves fluidly between the written word, the screen, the canvas, and the recording studio.</p>
+        <p>From heartwarming <strong>Christmas films</strong> to a literary novel, from children's books that spark imagination to an album born from a desert upbringing, Zach's work is united by one conviction: stories change people.</p>
+        <p>His documentary about <strong>Aramco Brats</strong> — produced with his brother and screened by royal invitation in <strong>Riyadh, Saudi Arabia</strong> — stands as a testament to the reach of authentic storytelling.</p>
+      </div>
+      <div class="about-stat-grid">
+        <div class="stat-box">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Christmas Films</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Books Published</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Album Released</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">🇸🇦</div>
+          <div class="stat-label">Royal Riyadh Screening</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILM -->
+<section id="film">
+  <div class="container">
+    <p class="section-label">On Screen</p>
+    <h2 class="section-title">Christmas Films</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Zachery has written and produced a growing catalogue of Christmas films — warm, character-driven stories that bring the holiday spirit to life. Watch them all on Vimeo.</p>
+
+    <div class="film-highlight">
+      <span class="film-badge">Vimeo Collection</span>
+      <h3>The Christmas Film Catalogue</h3>
+      <p>A series of original Christmas films crafted with heart and independent spirit. From concept to screen, each film reflects Zachery's signature warmth and eye for human moments.</p>
+      <a class="vimeo-link" href="https://vimeo.com/jackmittens" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.875 10.063C20.7 18.463 11.55 25.2 8.025 25.2 4.5 25.2 4.2 20.963 2.7 16.388 1.463 12.413.3 10.35 1.2 9.413c1.35-1.35 3.788 1.012 5.475 5.137.9 2.325 1.613 5.063 2.475 5.063.9 0 2.7-2.1 4.725-5.625 1.8-3.113 1.8-5.925.45-6.975-1.275-.975-3.15.375-4.125 1.575C9.45 7.5 10.988 3.563 14.963 3.563c3.3 0 5.025 2.475 3.637 7.575-.637 2.325-1.8 4.95-2.1 6.412-.3 1.5.3 1.913.9 1.913.75 0 2.213-1.05 3.825-3.15 1.8-2.438 2.588-5.1 2.025-6.563-.9-2.325-3.525-.675-3.675.038-.15.75.713 1.237 1.3.275z" fill="currentColor"/>
+        </svg>
+        Watch on Vimeo — Zach Nims Katy TX
+      </a>
+    </div>
+
+    <div class="film-highlight">
+      <span class="film-badge">Documentary</span>
+      <h3>Aramco Brats</h3>
+      <p>A deeply personal documentary co-created with his brother, exploring the unique experience of growing up as Aramco Brats — children raised in the oil camps of Saudi Arabia. The film was <strong>screened by royal invitation in Riyadh</strong>, a rare honour for an independent production.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section id="books">
+  <div class="container">
+    <p class="section-label">On the Page</p>
+    <h2 class="section-title">Books & Scripts</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Five published works spanning literary fiction, children's literature, and social advocacy — plus an original screenplay adaptation.</p>
+
+    <div class="books-grid">
+      <!-- VEG -->
+      <div class="book-card novel">
+        <div class="book-genre">Literary Novel & Screenplay</div>
+        <h3>VEG</h3>
+        <p>Zachery's debut novel — a work rich enough to demand its own screenplay adaptation. An ambitious creative universe told first in prose, then reimagined for the screen.</p>
+      </div>
+
+      <!-- Heroes in My Closet -->
+      <div class="book-card children">
+        <div class="book-genre">Children's Book · The Heroes Series, Book 1</div>
+        <h3>The Heroes in My Closet</h3>
+        <p>A story about bravery and the discovery that the greatest heroes in a child's life are right at home — their parents. Part one of the two-book Heroes Series.</p>
+      </div>
+
+      <!-- Heroes Inside -->
+      <div class="book-card children">
+        <div class="book-genre">Children's Book · The Heroes Series, Book 2</div>
+        <h3>The Heroes Inside</h3>
+        <p>The companion volume to the series, turning the lens inward. A celebration of self-confidence, reminding young readers that the most important hero lives inside them.</p>
+      </div>
+
+      <!-- They Say I Have a Problem -->
+      <div class="book-card children">
+        <div class="book-genre">Children's Book · Advocacy</div>
+        <h3>They Say I Have a Problem</h3>
+        <p>A compassionate, thought-provoking book for children with ADD and ADHD and their families. It challenges the rush to medicate, proposing instead that these traits may be an evolutionary advantage — not a condition to be corrected.</p>
+      </div>
+
+      <!-- The Sleepy Book -->
+      <div class="book-card children">
+        <div class="book-genre">Children's Book · Bedtime Adventure</div>
+        <h3>The Sleepy Book</h3>
+        <p>A magical bedtime adventure that makes reading itself part of the magic. The secret? If a child reads it just right, every book holds enough magic to put their parents to sleep. A love letter to reading.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC & DOCUMENTARY -->
+<section id="creative">
+  <div class="container">
+    <p class="section-label">Sound & Screen</p>
+    <h2 class="section-title">Music & Documentary</h2>
+    <div class="divider"></div>
+    <p class="section-intro">A musician and documentarian shaped by a childhood between two worlds — Texas and the sands of Saudi Arabia.</p>
+
+    <div class="creative-grid">
+      <div class="creative-card">
+        <span class="icon">🎵</span>
+        <h3>Tunes from the Dunes</h3>
+        <p>An album born from memory and brotherhood. Created alongside his brother, <em>Tunes from the Dunes</em> draws on the unique landscape of growing up between the Texas plains and the Saudi desert — a sonic portrait of a life lived between worlds.</p>
+      </div>
+      <div class="creative-card">
+        <span class="icon">🎬</span>
+        <h3>Aramco Brats</h3>
+        <p>A documentary co-directed with his brother about the extraordinary experience of Aramco Brats — children who grew up in the compound communities of Saudi Arabia during their parents' oil industry postings.</p>
+        <div class="royal-badge">
+          👑 Screened by Royal Invitation · Riyadh, Saudi Arabia
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ART -->
+<section id="art">
+  <div class="container">
+    <p class="section-label">Visual Art</p>
+    <h2 class="section-title">Latest Works</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Zachery's visual art extends his storytelling into image and form. New pieces available to view — coming soon to this gallery.</p>
+
+    <div class="art-placeholder-grid">
+      <div class="art-tile">
+        <span class="art-tile-icon">🖼</span>
+        Piece I
+      </div>
+      <div class="art-tile">
+        <span class="art-tile-icon">🖼</span>
+        Piece II
+      </div>
+      <div class="art-tile">
+        <span class="art-tile-icon">🖼</span>
+        Piece III
+      </div>
+    </div>
+    <p class="art-note">→ Upload your art images and I'll drop them right into this gallery.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Whether you're a publisher, filmmaker, collaborator, or a fan of the work — Zachery welcomes the conversation.</p>
+    <a href="mailto:zachlnims@gmail.com" class="contact-link">Send a Message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span class="footer-name">Zachery Nims</span> — All rights reserved.</p>
+  <p>Katy, Texas · Storyteller in all dimensions</p>
+</footer>
+
+</body>
+</html>
