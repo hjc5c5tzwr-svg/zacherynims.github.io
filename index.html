@@ -285,6 +285,77 @@
       line-height: 1.65;
     }
 
+    /* ── FEATURED FREE BOOK ── */
+    .featured-book {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 2.5rem;
+      align-items: center;
+      background: linear-gradient(135deg, #1a2f1e 0%, var(--mid) 100%);
+      border: 1px solid rgba(200,169,110,0.3);
+      padding: 2.2rem;
+      border-radius: 6px;
+    }
+    .featured-cover img {
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+      display: block;
+    }
+    .featured-badge {
+      display: inline-block;
+      background: var(--red, #C8102E);
+      background: #C8102E;
+      color: #fff;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
+    .featured-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+      line-height: 1.15;
+    }
+    .featured-info p {
+      color: rgba(240,235,225,0.7);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+    .featured-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+    .btn-primary, .btn-ghost {
+      text-decoration: none;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: transform 0.15s, background 0.2s, color 0.2s;
+    }
+    .btn-primary { background: var(--sand); color: var(--dark); }
+    .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid rgba(200,169,110,0.5); color: var(--sand); }
+    .btn-ghost:hover { background: rgba(200,169,110,0.12); transform: translateY(-2px); }
+    .fan-note {
+      margin-top: 1.4rem;
+      font-size: 0.82rem !important;
+      line-height: 1.6 !important;
+      color: rgba(240,235,225,0.55) !important;
+      border-top: 1px solid rgba(200,169,110,0.18);
+      padding-top: 1rem;
+    }
+    .fan-note strong { color: var(--sand); }
+    @media (max-width: 768px) {
+      .featured-book { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
+      .featured-cover { max-width: 320px; margin: 0 auto; }
+    }
+
     /* ── MUSIC & DOCUMENTARY ── */
     #creative { background: var(--navy); }
     .creative-grid {
@@ -321,34 +392,56 @@
       padding: 0.4rem 0.9rem;
     }
 
-    /* ── ART ── */
+    /* ── ART GALLERY ── */
     #art { background: var(--dark); }
-    .art-placeholder-grid {
+    .art-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      gap: 1.2rem;
     }
-    .art-tile {
-      aspect-ratio: 1;
+    .art-item {
+      position: relative;
+      overflow: hidden;
       background: var(--mid);
-      border: 1px dashed rgba(200,169,110,0.2);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      color: rgba(200,169,110,0.3);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-      gap: 0.5rem;
-      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
     }
-    .art-tile:hover { border-color: rgba(200,169,110,0.5); color: rgba(200,169,110,0.6); }
-    .art-tile-icon { font-size: 2rem; }
-    .art-note {
-      color: rgba(240,235,225,0.4);
-      font-size: 0.85rem;
-      font-style: italic;
+    .art-item--tall { grid-row: span 2; }
+    .art-item--wide { grid-column: span 2; }
+    .art-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+      min-height: 220px;
+    }
+    .art-item:hover img { transform: scale(1.04); }
+    .art-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(transparent, rgba(7,17,28,0.88));
+      display: flex; flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .art-item:hover .art-caption { transform: translateY(0); }
+    .art-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+    }
+    .art-medium {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--sand);
+      margin-top: 0.2rem;
+    }
+    @media (max-width: 768px) {
+      .art-gallery { grid-template-columns: 1fr 1fr; }
+      .art-item--tall { grid-row: span 1; }
+      .art-item--wide { grid-column: span 2; }
+      .art-caption { transform: translateY(0); }
     }
 
     /* ── CONTACT ── */
@@ -391,7 +484,6 @@
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .about-grid, .creative-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .art-placeholder-grid { grid-template-columns: repeat(2,1fr); }
       footer { flex-direction: column; text-align: center; }
     }
 
@@ -425,6 +517,7 @@
     <span class="tag">Christmas Films</span>
     <span class="tag">Novel — VEG</span>
     <span class="tag">Children's Books</span>
+    <span class="tag">Free Christmas Book</span>
     <span class="tag">Tunes from the Dunes</span>
     <span class="tag">Aramco Brats</span>
     <span class="tag">Visual Art</span>
@@ -451,12 +544,12 @@
         <h2 class="section-title">A Life Built on<br>Storytelling</h2>
         <div class="divider"></div>
         <p>Zachery Nims is a multi-disciplinary creative based in <strong>Katy, Texas</strong> — a storyteller who moves fluidly between the written word, the screen, the canvas, and the recording studio.</p>
-        <p>From heartwarming <strong>Christmas films</strong> to a literary novel, from children's books that spark imagination to an album born from a desert upbringing, Zach's work is united by one conviction: stories change people.</p>
-        <p>His documentary about <strong>Aramco Brats</strong> — produced with his brother and screened by royal invitation in <strong>Riyadh, Saudi Arabia</strong> — stands as a testament to the reach of authentic storytelling.</p>
+        <p>From heartwarming <strong>Christmas films</strong> to a science fiction novel, from children's books that spark imagination to an album born from a desert upbringing, Zach's work is united by one conviction: stories change people.</p>
+        <p>His feature documentary <strong>Home: The Aramco Brats' Story</strong> — created with his brother Todd — was the first film to portray Saudi Arabia through the eyes of the expatriate children who grew up there, and screened in <strong>Riyadh, Saudi Arabia</strong>.</p>
       </div>
       <div class="about-stat-grid">
         <div class="stat-box">
-          <div class="stat-num">5+</div>
+          <div class="stat-num">🎬</div>
           <div class="stat-label">Christmas Films</div>
         </div>
         <div class="stat-box">
@@ -469,7 +562,7 @@
         </div>
         <div class="stat-box">
           <div class="stat-num">🇸🇦</div>
-          <div class="stat-label">Royal Riyadh Screening</div>
+          <div class="stat-label">Screened in Riyadh</div>
         </div>
       </div>
     </div>
@@ -497,9 +590,13 @@
     </div>
 
     <div class="film-highlight">
-      <span class="film-badge">Documentary</span>
-      <h3>Aramco Brats</h3>
-      <p>A deeply personal documentary co-created with his brother, exploring the unique experience of growing up as Aramco Brats — children raised in the oil camps of Saudi Arabia. The film was <strong>screened by royal invitation in Riyadh</strong>, a rare honour for an independent production.</p>
+      <span class="film-badge">Feature Documentary</span>
+      <h3>Home: The Aramco Brats' Story</h3>
+      <p>Co-created with his brother Todd Nims and filmmaker Matthew Miller, this feature-length documentary reveals the Kingdom of Saudi Arabia as seen through the eyes of the Western expatriate children who grew up there between 1933 and the present day. Narrated by citizens of all faiths, the film looks at the cultural aspects of a place many overlook — and proves that home is where the heart is.</p>
+      <p style="margin-top:0.8rem; color: rgba(240,235,225,0.5); font-size:0.9rem;">Produced by Aramco Brat Media &amp; Nims Brothers Films &nbsp;·&nbsp; Screened in Riyadh, Saudi Arabia</p>
+      <a class="vimeo-link" href="https://www.imdb.com/title/tt5981348/" target="_blank" rel="noopener">
+        🎬 &nbsp;View on IMDb
+      </a>
     </div>
   </div>
 </section>
@@ -510,14 +607,15 @@
     <p class="section-label">On the Page</p>
     <h2 class="section-title">Books & Scripts</h2>
     <div class="divider"></div>
-    <p class="section-intro">Five published works spanning literary fiction, children's literature, and social advocacy — plus an original screenplay adaptation.</p>
+    <p class="section-intro">Five published works spanning science fiction, children's literature, and social advocacy — plus an original screenplay adaptation and a free Christmas picture book. <a href="https://www.goodreads.com/author/show/15074016.Zachery_Nims" target="_blank" rel="noopener" style="color:var(--sand); border-bottom:1px solid rgba(200,169,110,0.3);">Browse all titles on Goodreads →</a></p>
 
     <div class="books-grid">
       <!-- VEG -->
       <div class="book-card novel">
-        <div class="book-genre">Literary Novel & Screenplay</div>
+        <div class="book-genre">Science Fiction Novel &amp; Screenplay · 2016</div>
         <h3>VEG</h3>
-        <p>Zachery's debut novel — a work rich enough to demand its own screenplay adaptation. An ambitious creative universe told first in prose, then reimagined for the screen.</p>
+        <p>Zachery's science fiction debut. <em>VEG</em> — short for Virtual Earth Grid — follows four characters whose separate worlds collide inside an augmented-reality game that could either save humanity or destroy it. Set against a collapsed economy and a shifting world order, it asks whether a single game can restore a broken civilization or trigger its final war. Eerily, it imagined AR gaming months before Pokémon GO swept the world. Now adapted by Zachery into a screenplay.</p>
+        <a class="vimeo-link" href="https://www.goodreads.com/author/show/15074016.Zachery_Nims" target="_blank" rel="noopener" style="font-size:0.72rem; margin-top:1rem;">📖 &nbsp;View on Goodreads</a>
       </div>
 
       <!-- Heroes in My Closet -->
@@ -538,7 +636,7 @@
       <div class="book-card children">
         <div class="book-genre">Children's Book · Advocacy</div>
         <h3>They Say I Have a Problem</h3>
-        <p>A compassionate, thought-provoking book for children with ADD and ADHD and their families. It challenges the rush to medicate, proposing instead that these traits may be an evolutionary advantage — not a condition to be corrected.</p>
+        <p>A children's book that reframes ADD and ADHD in a positive light — told through the eyes of a child. It asks us to remember when these same traits were simply called creative, spontaneous, and imaginative, and gently challenges the idea that they are a problem to be medicated rather than a gift to be nurtured.</p>
       </div>
 
       <!-- The Sleepy Book -->
@@ -546,6 +644,23 @@
         <div class="book-genre">Children's Book · Bedtime Adventure</div>
         <h3>The Sleepy Book</h3>
         <p>A magical bedtime adventure that makes reading itself part of the magic. The secret? If a child reads it just right, every book holds enough magic to put their parents to sleep. A love letter to reading.</p>
+      </div>
+    </div>
+
+    <!-- FEATURED FREE BOOK -->
+    <div class="featured-book" id="bucee">
+      <div class="featured-cover">
+        <img src="buc-ee-cover.jpg" alt="Buc-ee the Christmas Beaver book cover" loading="lazy" />
+      </div>
+      <div class="featured-info">
+        <div class="featured-badge">Free to Read · Christmas Picture Book</div>
+        <h3>Buc-ee the Christmas Beaver</h3>
+        <p>A rhyming Christmas picture book born from one of Zachery's holiday films — inspired by his own son looking unforgettably cute in a little Christmas outfit. Buc-ee the beaver of Oyster Creek discovers the true power of Christmas and learns that even someone soft and sweet can accomplish great things with a little belief. Illustrated in vivid, joyful color.</p>
+        <div class="featured-actions">
+          <a href="buc-ee-reader.html" class="btn-primary">📖 Read Online Free</a>
+          <a href="BUC-EE_THE_CHRISTMAS_BEAVER.pdf" download class="btn-ghost">⬇ Download PDF</a>
+        </div>
+        <p class="fan-note"><strong>An unofficial fan tribute.</strong> Created out of pure love for Buc-ee's and the Texas spirit, offered free of charge. Zachery would be thrilled to partner with Buc-ee's officially — and has <strong>three more Buc-ee's books</strong> already written and ready to go. Buc-ee's, let's talk! 🦫</p>
       </div>
     </div>
   </div>
@@ -567,11 +682,12 @@
       </div>
       <div class="creative-card">
         <span class="icon">🎬</span>
-        <h3>Aramco Brats</h3>
-        <p>A documentary co-directed with his brother about the extraordinary experience of Aramco Brats — children who grew up in the compound communities of Saudi Arabia during their parents' oil industry postings.</p>
+        <h3>Home: The Aramco Brats' Story</h3>
+        <p>A feature documentary co-directed with brother Todd Nims and Matthew Miller — the first film to explore Saudi Arabia through the eyes of the expatriate children raised there. Born in Dhahran and evacuated during the Gulf War, the Nims brothers brought their own lived story to the screen. After viewing this film, you won't look at Saudi Arabia, Islam, or the world news the same.</p>
         <div class="royal-badge">
-          👑 Screened by Royal Invitation · Riyadh, Saudi Arabia
+          👑 Screened in Riyadh, Saudi Arabia
         </div>
+        <a class="vimeo-link" style="margin-top:1rem;" href="https://www.imdb.com/title/tt5981348/" target="_blank" rel="noopener">🎬 &nbsp;View on IMDb</a>
       </div>
     </div>
   </div>
@@ -583,23 +699,67 @@
     <p class="section-label">Visual Art</p>
     <h2 class="section-title">Latest Works</h2>
     <div class="divider"></div>
-    <p class="section-intro">Zachery's visual art extends his storytelling into image and form. New pieces available to view — coming soon to this gallery.</p>
+    <p class="section-intro">Zachery's visual art spans pencil portraiture, bold abstraction, neo-classical painting, and intricate mixed-media — each piece a story told without words.</p>
 
-    <div class="art-placeholder-grid">
-      <div class="art-tile">
-        <span class="art-tile-icon">🖼</span>
-        Piece I
+    <div class="art-gallery">
+
+      <div class="art-item art-item--tall">
+        <img src="great_depression.jpg" alt="Great Depression — pencil portrait" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Great Depression</span>
+          <span class="art-medium">Pencil on canvas</span>
+        </div>
       </div>
-      <div class="art-tile">
-        <span class="art-tile-icon">🖼</span>
-        Piece II
+
+      <div class="art-item">
+        <img src="brother_in_spain.jpg" alt="Brother in Spain — abstract expressionist sketch" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Brother in Spain</span>
+          <span class="art-medium">Pencil &amp; ink</span>
+        </div>
       </div>
-      <div class="art-tile">
-        <span class="art-tile-icon">🖼</span>
-        Piece III
+
+      <div class="art-item">
+        <img src="electroshock.jpg" alt="Electroshock — graphite portrait" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Electroshock</span>
+          <span class="art-medium">Graphite on paper</span>
+        </div>
       </div>
+
+      <div class="art-item">
+        <img src="creation.jpg" alt="Creation — abstract ink drawing" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Creation</span>
+          <span class="art-medium">Ink on canvas</span>
+        </div>
+      </div>
+
+      <div class="art-item">
+        <img src="greece.jpg" alt="Greece — neo-classical acrylic painting" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Greece</span>
+          <span class="art-medium">Acrylic on canvas</span>
+        </div>
+      </div>
+
+      <div class="art-item">
+        <img src="greece_2.jpg" alt="Greece II — neo-classical acrylic painting" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Greece II</span>
+          <span class="art-medium">Acrylic on canvas</span>
+        </div>
+      </div>
+
+      <div class="art-item art-item--wide">
+        <img src="memories.jpg" alt="Memories — mixed media painting with playing cards" loading="lazy" />
+        <div class="art-caption">
+          <span class="art-title">Memories</span>
+          <span class="art-medium">Mixed media on canvas</span>
+        </div>
+      </div>
+
     </div>
-    <p class="art-note">→ Upload your art images and I'll drop them right into this gallery.</p>
   </div>
 </section>
 
